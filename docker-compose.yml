@@ -1,0 +1,30 @@
+version: "3.7"
+networks: 
+    test:
+        driver: bridge
+services: 
+    db_nikita: 
+        image: postgres
+        environment: 
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_DB: NikitaDB
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        networks: 
+            - test
+    web:
+        # build: .
+        image: node:12
+        depends_on:
+            - db_nikita
+        ports: 
+            - "4000:80"
+        volumes: 
+            - .:/app
+        working_dir: /app
+        command: ["node", "server.js"]
+        networks: 
+            - test
