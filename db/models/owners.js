@@ -1,6 +1,6 @@
 const  {Model} = require("objection")
 
-module.exports = class OwnerModel extends Model {
+module.exports = class OwnersModel extends Model {
 
     static get tableName() {
         return "owners"

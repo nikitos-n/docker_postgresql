@@ -1,8 +1,7 @@
 const {Model} = require("objection")
 const Owners = require("./owners")
 
-
-module.exports = class CarModel extends Model {
+module.exports = class CarsModel extends Model {
     
     //Table name
     static get tableName() { 
@@ -31,11 +30,11 @@ module.exports = class CarModel extends Model {
     //Relations
     static relationMappings = {
         owner: {
-            relation: Model.HasManyRelation,
+            relation: Model.BelongsToOneRelation,
             modelClass: Owners,
             join: {
-                from: "owner.id",
-                to: "cars.idOwner"
+                from: "cars.idOwner",
+                to: "owners.id"
               }
         }
     }
