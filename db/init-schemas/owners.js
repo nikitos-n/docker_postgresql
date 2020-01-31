@@ -7,7 +7,7 @@ exports.up = knex => knex.schema
         table.string("lastName", 40) 
         table.number("age")       
     })
-    
+
 exports.down = knex => {
     await knex.schema.dropTableIfExists(Owners)
 }
