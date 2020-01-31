@@ -12,7 +12,7 @@ services:
         volumes:
             - ./pgdata:/var/lib/postgresql/data
         ports:
-            - `5432:${POSTGRES_PORT}`
+            - "5432:5432"
         networks: 
             - test
     web:
@@ -21,7 +21,7 @@ services:
         depends_on:
             - db_nikita
         ports: 
-            - `4000:${SERVER_PORT}`
+            - "4000:80"
         volumes: 
             - .:/app
         working_dir: /app

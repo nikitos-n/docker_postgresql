@@ -1,9 +1,10 @@
-const  {Model} = require("objection")
+const {Model} = require("objection")
+const CarsModel = require("./cars")
+const constants = require("../constants")
 
 module.exports = class OwnersModel extends Model {
-
     static get tableName() {
-        return "owners"
+        return constants.Onwers
     }
 
     static get idColumn() {
@@ -17,11 +18,22 @@ module.exports = class OwnersModel extends Model {
 
             properties: {
                 id: {type: "integer"},
-                firstName: {type: 'string', minLength: 1, maxLength: 255},
-                lastName: {type: 'string', minLength: 1, maxLength: 255},
+                firstName: {type: 'string', minLength: 1, maxLength: 40},
+                lastName: {type: 'string', minLength: 1, maxLength: 40},
                 age: {type: "number"}
             }
         }
     }
 
+    //Relations
+    static relationMappings = {
+        owner: {
+            relation: Model.HasManyRelation,
+            modelClass: CarsModel,
+            join: {
+                from: `${constants.Onwers}.id`,
+                to: `${constants.Cars}.idOwner`
+              }
+        }
+    }
 }

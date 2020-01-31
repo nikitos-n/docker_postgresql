@@ -1,7 +1,7 @@
 const express = require("express")
 const server = express()
 const {Client} = require("pg")
-require("dotenv").config()
+require("dotenv").config({path: `${__dirname}/.env.local`})
 
 const {OwnersModel, CarsModel, Query} = require("./db")
 const {insertIntoOwners, insertIntoCars, selectFromTables} = Query
@@ -29,7 +29,7 @@ const client = new Client({
 client.connect()
     .then(() => {
         console.log(`Connected to ${process.env.POSTGRES_NAME}`)
-        insertIntoOwners(OwnersModel)
+        // insertIntoOwners(OwnersModel)
         // insertIntoCars(CarsModel)
         // selectFromTables(CarsModel)
     })

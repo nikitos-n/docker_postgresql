@@ -1,11 +1,11 @@
 const {Model} = require("objection")
-const Owners = require("./owners")
+const constants = require("../constants")
 
 module.exports = class CarsModel extends Model {
     
     //Table name
     static get tableName() { 
-        return "cars"
+        return constants.Cars
     }
 
     //Primiray key
@@ -24,18 +24,6 @@ module.exports = class CarsModel extends Model {
                 idOwner: {type: ["integer", "null"]},
                 model: {type: "string", minLength: 1, maxLength: 40}
             }
-        }
-    }
-
-    //Relations
-    static relationMappings = {
-        owner: {
-            relation: Model.BelongsToOneRelation,
-            modelClass: Owners,
-            join: {
-                from: "cars.idOwner",
-                to: "owners.id"
-              }
         }
     }
 
